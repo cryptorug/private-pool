@@ -212,7 +212,7 @@ constructor(
     );
 
     // @dev: link the user's wallet to the customer list
-    function addClient(address _wallet) external onlyDev {
+    function addClient(address _wallet) external onlyAPI {
     require(clientMap[_wallet] != true && blackList[_wallet] != true,"WARNINGS: check wallet status");
         _clientIn(_wallet);
         emit clientStatus(_wallet, clientMap[_wallet]);
@@ -224,7 +224,7 @@ constructor(
     }
 
     // @dev: remove the user's wallet from the customer list
-    function removeClient(address _wallet) external onlyDev {
+    function removeClient(address _wallet) external onlyAPI {
     require(clientMap[_wallet] == true,"WARNINGS: user not found");
         _clientOut(_wallet);
         emit clientStatus(_wallet, clientMap[_wallet]);
