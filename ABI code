@@ -3,12 +3,27 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_dev",
+				"name": "_routerPool",
 				"type": "address"
 			},
 			{
 				"internalType": "address",
-				"name": "_market",
+				"name": "_tokenLP",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_client",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_walletDev",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_walletMarket",
 				"type": "address"
 			}
 		],
@@ -21,23 +36,131 @@
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "marketWallet",
+				"name": "account",
 				"type": "address"
 			},
 			{
 				"indexed": false,
-				"internalType": "uint256",
-				"name": "system",
-				"type": "uint256"
+				"internalType": "bool",
+				"name": "isAuthorized",
+				"type": "bool"
+			}
+		],
+		"name": "AuthorizationUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "wallet",
+				"type": "address"
 			},
 			{
-				"indexed": false,
-				"internalType": "uint256",
+				"indexed": true,
+				"internalType": "address",
+				"name": "addedBy",
+				"type": "address"
+			}
+		],
+		"name": "ClientAdded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "wallet",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "collectedBy",
+				"type": "address"
+			}
+		],
+		"name": "FeesCollected",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
 				"name": "client",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
 				"type": "uint256"
 			}
 		],
-		"name": "adjustFees",
+		"name": "LPStaked",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "client",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "LPUnstaked",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "MetamaskWithdrawal",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
 		"type": "event"
 	},
 	{
@@ -52,7 +175,7 @@
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "wallet",
+				"name": "router",
 				"type": "address"
 			},
 			{
@@ -62,7 +185,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "approve",
+		"name": "PreApproval",
 		"type": "event"
 	},
 	{
@@ -71,91 +194,9 @@
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "wallet",
+				"name": "pair",
 				"type": "address"
 			},
-			{
-				"indexed": false,
-				"internalType": "bool",
-				"name": "status",
-				"type": "bool"
-			}
-		],
-		"name": "blackListStatus",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "token",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "wallet",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "claim",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "wallet",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "bool",
-				"name": "state",
-				"type": "bool"
-			}
-		],
-		"name": "clientStatus",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "token",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "wallet",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "drawLiquidity",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
 			{
 				"indexed": true,
 				"internalType": "address",
@@ -164,12 +205,12 @@
 			},
 			{
 				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "setBy",
+				"type": "address"
 			}
 		],
-		"name": "inject",
+		"name": "StakeSet",
 		"type": "event"
 	},
 	{
@@ -178,7 +219,81 @@
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "token",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "fromToken",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "toToken",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amountIn",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amountOut",
+				"type": "uint256"
+			}
+		],
+		"name": "SwapExecutedV2",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "fromToken",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "toToken",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amountIn",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amountOut",
+				"type": "uint256"
+			}
+		],
+		"name": "SwapExecutedV3",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
 				"type": "address"
 			},
 			{
@@ -186,9 +301,15 @@
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "routerPool",
+				"type": "address"
 			}
 		],
-		"name": "liquidityReserve",
+		"name": "USDTStaked",
 		"type": "event"
 	},
 	{
@@ -197,9 +318,84 @@
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "token",
+				"name": "user",
 				"type": "address"
 			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "contractAddress",
+				"type": "address"
+			}
+		],
+		"name": "USDTUnstaked",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amountIn",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amountOut",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "routerPool",
+				"type": "address"
+			}
+		],
+		"name": "WETHStaked",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "swappedAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "WETHUnstaked",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
 			{
 				"indexed": true,
 				"internalType": "address",
@@ -207,13 +403,13 @@
 				"type": "address"
 			},
 			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
+				"indexed": true,
+				"internalType": "address",
+				"name": "addedBy",
+				"type": "address"
 			}
 		],
-		"name": "metamaskLoot",
+		"name": "WhiteListed",
 		"type": "event"
 	},
 	{
@@ -222,126 +418,25 @@
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "token",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "wallet",
+				"name": "client",
 				"type": "address"
 			},
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "amount",
+				"name": "swapUSDT",
 				"type": "uint256"
 			}
 		],
-		"name": "newLiquidity",
+		"name": "WithdrawLPExecuted",
 		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "marketWallet",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "percent",
-				"type": "uint256"
-			}
-		],
-		"name": "newPercent",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "marketWallet",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "timerForDays",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "timer",
-				"type": "uint256"
-			}
-		],
-		"name": "newPerform",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "wallet",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "bool",
-				"name": "value",
-				"type": "bool"
-			}
-		],
-		"name": "newWalletApi",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "wallet",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "bool",
-				"name": "status",
-				"type": "bool"
-			}
-		],
-		"name": "whiteListStatus",
-		"type": "event"
-	},
-	{
-		"inputs": [],
-		"name": "ADDRESSES_PROVIDER",
-		"outputs": [
-			{
-				"internalType": "contract IPoolAddressesProvider",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
 	},
 	{
 		"inputs": [],
 		"name": "POOL",
 		"outputs": [
 			{
-				"internalType": "contract IPool",
+				"internalType": "contract IMarketInteractionsLP",
 				"name": "",
 				"type": "address"
 			}
@@ -353,40 +448,18 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_transactionHash",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_wallet",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
 				"name": "_amount",
 				"type": "uint256"
 			}
 		],
-		"name": "SupplyLiquidity",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
+		"name": "WithDrawMetamask",
+		"outputs": [
 			{
-				"internalType": "address",
-				"name": "_wallet",
-				"type": "address"
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
-		"name": "addBlackList",
-		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -407,18 +480,26 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_token",
+				"name": "_wallet",
 				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
 			}
 		],
-		"name": "addReserve",
+		"name": "addWhite",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "clientAddres",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -427,59 +508,18 @@
 				"internalType": "address",
 				"name": "_wallet",
 				"type": "address"
-			},
-			{
-				"internalType": "bool",
-				"name": "_value",
-				"type": "bool"
 			}
 		],
-		"name": "addWalletAPI",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_wallet",
-				"type": "address"
-			}
-		],
-		"name": "addWhitelist",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_wallet",
-				"type": "address"
-			}
-		],
-		"name": "checkBalanceWallet",
+		"name": "clientBalance",
 		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "balanceIN",
+				"name": "stakeInUSDT",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "stakeIN",
+				"name": "stakeInWETH",
 				"type": "uint256"
 			}
 		],
@@ -488,93 +528,6 @@
 	},
 	{
 		"inputs": [],
-		"name": "checkList",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "Clients",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "WhiteList",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "BlackList",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_wallet",
-				"type": "address"
-			}
-		],
-		"name": "checkWalletApi",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_wallet",
-				"type": "address"
-			}
-		],
-		"name": "checkWalletStatus",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "clientIn",
-				"type": "bool"
-			},
-			{
-				"internalType": "bool",
-				"name": "whiteIn",
-				"type": "bool"
-			},
-			{
-				"internalType": "bool",
-				"name": "blackIn",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_wallet",
-				"type": "address"
-			}
-		],
 		"name": "collectFees",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -594,65 +547,8 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_userAddress",
-				"type": "address"
-			}
-		],
-		"name": "getUserAccountData",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "totalCollateralBase",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "totalDebtBase",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "availableBorrowsBase",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "currentLiquidationThreshold",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "ltv",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "healthFactor",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			}
-		],
-		"name": "injectLiquidityReserve",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
-		"name": "percent",
+		"name": "getBalance",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -664,29 +560,60 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "getTokenLP",
+		"outputs": [
 			{
-				"internalType": "address",
-				"name": "_wallet",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "amountLPs",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "valueInUSDT",
+				"type": "uint256"
 			}
 		],
-		"name": "removeBlackList",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "inStakeLP",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_wallet",
+				"name": "account",
 				"type": "address"
 			}
 		],
-		"name": "removeClient",
+		"name": "revokeAutorization",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "routerAddressV3",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -700,19 +627,11 @@
 				"internalType": "address",
 				"name": "_wallet",
 				"type": "address"
-			}
-		],
-		"name": "removeWhiteList",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
+			},
 			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
 			}
 		],
 		"name": "safeWithDraw",
@@ -729,49 +648,24 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "_systemFee",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "_tokenUSDT",
+				"type": "address"
 			},
 			{
-				"internalType": "uint256",
-				"name": "_userFee",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "_token",
+				"type": "address"
 			}
 		],
-		"name": "setFee",
+		"name": "setStake",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint128",
-				"name": "_percentage",
-				"type": "uint128"
-			}
-		],
-		"name": "setPercent",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_days",
-				"type": "uint256"
-			}
-		],
-		"name": "setPerform",
+		"inputs": [],
+		"name": "stakeLP",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -780,16 +674,88 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_hash",
+				"name": "_amount",
 				"type": "uint256"
 			}
 		],
-		"name": "verifyHash",
+		"name": "stakeUSDT",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "stakeWETH",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "swapRouterV2",
 		"outputs": [
 			{
-				"internalType": "bool",
+				"internalType": "contract IUniswapV2Router02",
 				"name": "",
-				"type": "bool"
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "swapRouterV3",
+		"outputs": [
+			{
+				"internalType": "contract ISwapRouter",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "tokenLP",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "tokenUSDT",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "tokenWETH",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -799,21 +765,44 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_token",
+				"name": "newOwner",
 				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_wallet",
-				"type": "address"
-			},
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "unStakeLP",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
 			{
 				"internalType": "uint256",
 				"name": "_amount",
 				"type": "uint256"
 			}
 		],
-		"name": "withDrawMetamask",
+		"name": "unStakeUSDT",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "unStakeWETH",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -822,23 +811,17 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
 				"name": "_wallet",
 				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
 			}
 		],
-		"name": "withDrawlLiquidity",
+		"name": "withDrawLP",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
 	}
 ]
